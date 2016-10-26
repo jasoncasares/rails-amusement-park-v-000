@@ -1,0 +1,6 @@
+<%= @attraction.name %>
+<% if !current_user.admin? %>
+  <%= button_to "Go on this ride", {:controller => "users", :action => "ride", :attraction_id => @attraction.id, :user_id=> session[:user_id]}, :method=>:post %>
+<% else %>
+  <%= link_to "Edit Attraction", edit_attraction_path(@attraction) %>
+<% end %> 

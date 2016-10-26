@@ -23,7 +23,16 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-           <!--  nav here -->
+            <% if current_user %>
+              <li><a href="<%= user_url(current_user) %>"/>Hello, <%= current_user.name %>!</a></li>
+            <% end %>
+            <li><a href="<%= attractions_url %>"/>See attractions</a></li>
+            <% if current_user %>
+              <li><%= link_to 'Log Out', signout_path %></li>
+            <% else %>
+              <li><%= link_to 'Sign in', signin_path %></li>
+              <li><%= link_to 'Sign up Sign Up', signup_path %></li>
+            <% end %>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -31,7 +40,17 @@
 
     <!-- content -->
     <div class="container"  role="main">
+
+      <% if flash[:alert] %>
+        <div class="alert"><%= flash[:alert] %></div>
+      <% end %>
+
+      <% if flash[:notice] %>
+        <div class="notice"><%= flash[:notice] %></div>
+      <% end %>
+
       <%= yield %>
+
     </div>
 
   </body>
